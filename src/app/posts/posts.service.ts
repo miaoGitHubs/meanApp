@@ -6,7 +6,7 @@ import { map } from 'rxjs/operators';
 import { Router} from '@angular/router';
 import { environment} from '../../environments/environment';
 
-const BACKEND_URL = environment.apiUrl + '/posts/';
+const BACKEND_URL = environment.apiUrl + '/posts';
 
 @Injectable({providedIn: 'root'})
 export class PostsService {
@@ -81,6 +81,6 @@ export class PostsService {
   }
 
   deletePost(postId: string) {
-   return this.http.delete(BACKEND_URL + postId);
+   return this.http.delete(BACKEND_URL + '/' + postId);
   }
 }

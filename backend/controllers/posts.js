@@ -8,6 +8,7 @@ exports.createPost = (req, res, next) =>{
     imagePath: url + '/images/' + req.file.filename,
     creator: req.userData.userId
   });
+
   post.save().then( createdPost => {
     res.status(201).json({
       message: 'post added successfully',
