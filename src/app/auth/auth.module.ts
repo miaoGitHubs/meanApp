@@ -5,6 +5,7 @@ import {AngularMaterialModule} from '../angular-material.module';
 import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 import {AuthRoutingModule} from './auth-routing.module';
+import {MatGridListModule} from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import {AuthRoutingModule} from './auth-routing.module';
     CommonModule,
     AngularMaterialModule,
     FormsModule,
+    MatGridListModule,
     AuthRoutingModule
   ]
 })

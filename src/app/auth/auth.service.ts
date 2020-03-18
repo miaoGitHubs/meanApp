@@ -35,7 +35,8 @@ export class AuthService {
   }
 
   createUser(email: string, password: string) {
-    const authData: AuthData = {email: email, password: password};
+    const portraitURL = 'http://res.cloudinary.com/miaocloud/image/upload/v1509320436/icecream_tguy47.png';
+    const authData: AuthData = {email: email, password: password, portrait: portraitURL};
     this.http.post(BACKEND_URL + '/signup', authData).subscribe(
       res => {
         this.router.navigate(['/']);
@@ -46,8 +47,12 @@ export class AuthService {
     );
   }
 
+  getUserById(id: string) {
+     return this.http.get(BACKEND_URL + '/' + id );
+  }
+
   login(email: string, password: string) {
-    const authData: AuthData = {email: email, password: password};
+    const authData = {email: email, password: password};
     this.http.post<{token: string, expiresIn: number, userId: string}>(BACKEND_URL + '/login', authData)
       .subscribe( res => {
         const token = res.token;

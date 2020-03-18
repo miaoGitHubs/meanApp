@@ -11,6 +11,9 @@ import { ErrorInterceptor} from './error-interceptor';
 import { ErrorComponent} from './error/error.component';
 import { AngularMaterialModule} from './angular-material.module';
 import { PostsModule} from './posts/posts.module';
+import { CloudinaryModule } from '@cloudinary/angular-5.x';
+import { NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import * as  Cloudinary from 'cloudinary-core';
 
 @NgModule({
   declarations: [
@@ -21,10 +24,12 @@ import { PostsModule} from './posts/posts.module';
   imports: [
     BrowserModule,
     FormsModule,
+    NgbModule,
     BrowserAnimationsModule,
     HttpClientModule,
     AppRountingModule,
     AngularMaterialModule,
+    CloudinaryModule.forRoot(Cloudinary, { cloud_name: 'miaocloud'}),
     PostsModule
   ],
   providers: [

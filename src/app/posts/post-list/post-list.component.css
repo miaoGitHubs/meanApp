@@ -23,3 +23,16 @@ mat-spinner{
   width: 100%;
   box-shadow: 1px 1px 5px rgba(0,0,0,0.5);
 }
+
+.my-card {
+  max-width: 400px;
+}
+
+.example-header-image {
+  background-image: url(https://res.cloudinary.com/miaocloud/image/upload/v1538321051/headshot_qezt3r.jpg);
+  background-size: cover;
+}
+
+.myBtn{
+  float: right;
+}
