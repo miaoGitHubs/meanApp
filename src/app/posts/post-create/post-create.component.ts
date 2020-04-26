@@ -56,6 +56,7 @@ export class PostCreateComponent implements OnInit, OnDestroy {
               id: postData._id,
               title: postData.title,
               content: postData.content,
+              likeCount: postData.likeCount,
               imagePath: postData.imagePath,
               creator: postData.creator
             };
@@ -129,6 +130,7 @@ export class PostCreateComponent implements OnInit, OnDestroy {
             this.postId,
             this.form.value.title,
             this.form.value.content,
+            this.post.likeCount,
             this.form.value.image
           );
         }

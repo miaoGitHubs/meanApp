@@ -36,3 +36,9 @@ mat-spinner{
 .myBtn{
   float: right;
 }
+
+.myLike{
+  width: 15px;
+  height: 15px;
+  margin: 5px 10px;
+}

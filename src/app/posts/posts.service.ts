@@ -23,6 +23,7 @@ export class PostsService {
           return {
             title: post.title,
             content: post.content,
+            likeCount: post.likeCount,
             id: post._id,
             imagePath: post.imagePath,
             creator: post.creator
@@ -40,7 +41,7 @@ export class PostsService {
   }
 
   getPost(id: string) {
-    return this.http.get<{_id: string, title: string, content: string, imagePath: string, creator: string}>
+    return this.http.get<{_id: string, title: string, content: string, likeCount: number, imagePath: string, creator: string}>
     (BACKEND_URL + '/' + id);
 
   }
@@ -56,7 +57,7 @@ export class PostsService {
       });
   }
 
-  updatePost(id: string, title: string, content: string, image: File | string) {
+  updatePost(id: string, title: string, content: string, likeCount: number, image: File | string) {
     let postData: Post | FormData;
     if (typeof(image) === 'object') {
         postData = new FormData();
@@ -69,6 +70,7 @@ export class PostsService {
         id: id,
         title: title,
         content: content,
+        likeCount: likeCount,
         imagePath: image,
         creator: null
       };
@@ -78,6 +80,16 @@ export class PostsService {
       .subscribe(response => {
         this.router.navigate(['/']);
       });
+  }
+
+  likePost(postId: string, likeCount: number) {
+    const postData = {id: postId, likeCount: likeCount};
+    return this.http.put(BACKEND_URL + '/like/' + postId, postData);
+  }
+
+  unlikePost(postId: string, likeCount: number) {
+    const postData = {id: postId, likeCount: likeCount};
+    return this.http.put(BACKEND_URL + '/unlike/' + postId, postData);
   }
 
   deletePost(postId: string) {
