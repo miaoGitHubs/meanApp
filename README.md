@@ -25,3 +25,17 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+
+## How to run project in local
+
+Use one terminal for backend: goto \MEANApp\backend directory, and enter "npm start".
+Use another terminal for frontend: goto \MEANApp directory, and enter "ng serve".
+
+## How to deploy this project to heroku
+1. Goto angular.json: "outputPath": "backend/angular",
+2. Open terminal: ng build --prod
+3. Login Heroku and commit change to it so that deploy it on Heroku:
+1). heroku login
+2). git add .
+3). git commit -am "make it better"
+4). git push heroku master
