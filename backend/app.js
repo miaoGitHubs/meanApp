@@ -8,7 +8,7 @@ const userRouters = require('./routes/user');
 const app = express();
 //
 
-mongoose.connect('mongodb://miao:MIAO_DB_PWD_2019@ds029638.mlab.com:29638/heroku_7mp9s331')
+mongoose.connect('mongodb://miao:MIAO_DB_PWD_2019@ds029638.mlab.com:29638/heroku_7mp9s331', { useNewUrlParser: true })
   .then( () => {
     console.log('Connected to database!')
   })

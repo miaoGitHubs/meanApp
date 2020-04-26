@@ -7,7 +7,8 @@ exports.createUser = (req, res, next) =>{
     .then( hash => {
       const user = new User({
         email: req.body.email,
-        password: hash
+        password: hash,
+        portrait: req.body.portrait
       });
 
       user.save()
@@ -25,6 +26,20 @@ exports.createUser = (req, res, next) =>{
           })
         });
     });
+};
+
+exports.getUserById =(req, res, next) => {
+  User.findById(req.params.id).then( user => {
+    if (user) {
+      res.status(200).json(user);
+    } else {
+      res.status(404).json({ message: 'User not find!'});
+    }
+  }).catch(error => {
+    res.status(500).json({
+      message:'Fetching user failed!'
+    })
+  });
 };
 
 exports.userLogin = (req, res, next) => {

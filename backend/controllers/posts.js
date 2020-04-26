@@ -1,11 +1,13 @@
 const Post = require('../models/post');
+const cloudinary = require('cloudinary');
+const fs = require('fs');
 
 exports.createPost = (req, res, next) =>{
-  const url = req.protocol + '://' + req.get('host');
   const post = new Post({
     title: req.body.title,
     content: req.body.content,
-    imagePath: url + '/images/' + req.file.filename,
+    likeCount: 0,
+    imagePath: req.body.image,
     creator: req.userData.userId
   });
 
@@ -25,12 +27,9 @@ exports.createPost = (req, res, next) =>{
 
 };
 
-exports.updateUser = (req, res, next) =>{
+exports.updatePost = (req, res, next) =>{
   let imagePath = req.body.imagePath;
-  if (req.file) {
-    const url = req.protocol + '://' + req.get('host');
-    imagePath = url + '/images/' + req.file.filename
-  }
+
   const post = new Post({
     _id: req.body.id,
     title: req.body.title,
@@ -65,7 +64,7 @@ exports.getPosts = (req, res, next) =>{
   postQuery.then()
     .then(documents => {
       fetchedPosts = documents;
-      return Post.count();
+      return Post.countDocuments();
     }).then(count => {
     res.status(200).json({
       message: 'Posts fetched successfully!',
@@ -90,6 +89,40 @@ exports.getPost = (req, res, next) => {
   }).catch(error => {
     res.status(500).json({
       message:'Fetching posts failed!'
+    })
+  });
+};
+
+exports.likePost = (req, res, next) =>{
+  const post = new Post({
+    _id: req.body.id,
+    likeCount: req.body.likeCount,
+  });
+
+  Post.updateOne({_id: req.params.id}, post).then( result => {
+    if(result.n > 0) {
+      res.status(200).json({message: 'Like successful!'});
+    }
+  }).catch(error =>{
+    res.status(500).json({
+      message:'Couldn`t updated post!'
+    })
+  });
+};
+
+exports.unlikePost = (req, res, next) =>{
+  const post = new Post({
+    _id: req.body.id,
+    likeCount: req.body.likeCount,
+  });
+
+  Post.updateOne({_id: req.params.id}, post).then( result => {
+    if(result.n > 0) {
+      res.status(200).json({message: 'Unlike successful!'});
+    }
+  }).catch(error =>{
+    res.status(500).json({
+      message:'Couldn`t updated post!'
     })
   });
 };
