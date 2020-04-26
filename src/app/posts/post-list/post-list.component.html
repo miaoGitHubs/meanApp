@@ -37,9 +37,10 @@
             <p>{{posts[i+1].content}} </p>
           </mat-card-content>
           <mat-card-actions>
-            <a href="#">
-              <img src="../../../assets/icons/like.png" class="myLike"/>
+            <a href="#" (click)="likePhoto(i+1, posts[i+1].id)">
+              <img src="../../../assets/icons/like.png" class="myLike" [ngStyle]="likeStyle(i+1)"/>
             </a>
+            <span>{{posts[i+1].likeCount ? posts[i+1].likeCount : 0 }} </span>
             <button mat-button class="myBtn" color="warn" (click)="onDelete(posts[i+1].id)" *ngIf="userIsAuthenticated && userId === posts[i+1].creator">DELETE</button>
             <button mat-button class="myBtn" color="primary" [routerLink]="['/edit', posts[i+1].id]" *ngIf="userIsAuthenticated && userId === posts[i+1].creator">EDIT</button>
           </mat-card-actions>
